@@ -1,0 +1,13 @@
+*.bin
+.DS_Store
+*.bbl
+*.aux
+*.bib
+*.pdf
+*.xml
+*.gz
+*.blg
+*.log
+*.out
+*.toc
+doc/figure/*

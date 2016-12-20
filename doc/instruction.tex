@@ -1,0 +1,362 @@
+\documentclass[11pt]{article}
+
+\usepackage[dvips]{graphicx}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{psfrag}
+\usepackage{amsmath,mathtools,amssymb,rotating,dcolumn,texdraw,tabularx,colordvi}
+\usepackage[usenames]{color}
+\usepackage[nooneline,tight,raggedright]{subfigure}
+\usepackage{amsthm}
+
+\usepackage{wrapfig}
+\usepackage{pstricks,enumerate}
+
+\usepackage[font=footnotesize,format=plain,labelfont=bf]{caption}
+
+\usepackage{hyperref}
+\usepackage[backend=bibtex]{biblatex}
+\bibliography{references.bib}
+
+%\captionsetup{labelfont={color=Brown,bf},textfont={color=BurntOrange}}
+
+\definecolor{myTan}{rgb}{.7,0.4,.15}
+\captionsetup{labelfont={color=brown,bf},textfont={color=myTan}}
+
+\newcommand{\entry}[1]{\mbox{\sffamily\bfseries{#1:}}\hfil}%
+
+\setlength{\marginparwidth}{.65in}
+\def\margcomment#1{\Red{$\bullet$}\marginpar{\raggedright \Red{\tiny #1}}}
+
+\makeatletter
+\renewcommand{\section}{\@startsection
+{section}%
+{0}%
+{0mm}%
+{-0.35\baselineskip}%
+{0.01\baselineskip}%
+{\normalfont\Large\bfseries\color{brown}}}%
+\makeatother
+
+\makeatletter
+\renewcommand{\subsection}{\@startsection
+{subsection}%
+{1}%
+{0mm}%
+{-0.35\baselineskip}%
+{0.1\baselineskip}%
+{\normalfont\large\bfseries\color{brown}}}%
+\makeatother
+
+
+\makeatletter
+\renewcommand{\subsubsection}{\@startsection
+{subsubsection}%
+{1}%
+{0mm}%
+{-0.5\baselineskip}%
+{0.3\baselineskip}%
+{\normalfont\normalsize\itshape\centering\color{brown}}}%
+\makeatother
+
+%\renewcommand{\topfraction}{0.0}
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\floatpagefraction}{0.7}
+
+
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{-0.5in}
+\setlength{\footskip}{0.30in}
+\setlength{\textheight}{9.0in}
+\setlength{\headheight}{0.2in}
+\setlength{\headsep}{0.3in}
+
+\def\Dpartial#1#2{ \frac{\partial #1}{\partial #2} }
+\def\Dparttwo#1#2{ \frac{\partial^2 #1 }{ \partial #2^2} }
+\def\Dpartpart#1#2#3{ \frac{\partial^2 #1}{ \partial #2 \partial #3} }
+\def\Dnorm#1#2{ \frac{d #1 }{ d #2} }
+\def\Dnormtwo#1#2{ \frac{d^2 #1}{  d #2 ^2} }
+\def\Dtotal#1#2{ \frac{D #1 }{ D #2} }
+\def\Del#1#2{ \frac{\delta #1}{\delta #2} }
+\def\Var#1{\Dnorm{}{\epsilon} #1 \bigg|_{\epsilon=0}}
+
+\def\eps{\varepsilon}
+
+\newcommand{\vp}{v_p}
+\newcommand{\xp}{x_p}
+\newcommand{\vps}{v_p^*}
+\newcommand{\xps}{x_p^*}
+\newcommand{\Es}{E^*}
+\newcommand{\phis}{\phi^*}
+\newcommand{\Dx}{\Delta x}
+\newcommand{\Dt}{\Delta t}
+
+\newcommand{\vph}{\hat{v}_p}
+\newcommand{\xph}{\hat{x}_p}
+\newcommand{\Eh}{\hat{E}}
+\newcommand{\phih}{\hat{\phi}}
+\newcommand{\rhoh}{\hat{\rho}}
+
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cD}{\mathcal{D}}
+
+\newcommand{\timesum}{\sum\limits_{n=0}^{N_t-1}}
+\newcommand{\particlesum}{\sum\limits_{p=1}^{N}}
+\newcommand{\meshsum}{\sum\limits_{i=1}^{N_g}}
+
+\newcommand{\bxi}{\boldsymbol{\xi}}
+
+\newcommand{\bbK}{\hat{\mathbb{K}}}
+
+\newcommand{\myint}{\int_0^{T}\sum\limits_{p=1}^N}
+\newcommand{\mysum}{\sum\limits_{p=1}^N\int_0^{T}}
+\newcommand{\myiint}{\int_0^{T}\int_0^L}
+\newcommand{\dt}{\; dt}
+
+\def\bdash{\hbox{\drawline{4}{.5}\spacce{2}}}
+\def\spacce#1{\hskip #1pt}
+\def\drawline#1#2{\raise 2.5pt\vAox{\hrule width #1pt height #2pt}}
+\def\dashed{\bdash\bdash\bdash\bdash\nobreak\ }
+\def\solid{\drawline{24}{.5}\nobreak\ }
+\def\square{${\vcenter{\hrule height .4pt 
+              \hbox{\vrule width .4pt height 3pt \kern 3pt \vrule width .4pt}
+          \hrule height .4pt}}$\nobreak\ }
+\def\solidsquare{${\vcenter{\hrule height 3pt width 3pt}}$\nobreak\ }
+
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+ \renewcommand{\topfraction}{0.9}
+    \renewcommand{\bottomfraction}{0.8}	
+    \setcounter{topnumber}{2}
+    \setcounter{bottomnumber}{2}
+    \setcounter{totalnumber}{4}     % 2 may work better
+    \setcounter{dbltopnumber}{2}    % for 2-column pages
+    \renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
+    \renewcommand{\textfraction}{0.07}	% allow minimal text w. figs
+    \renewcommand{\floatpagefraction}{0.7}	% require fuller float pages
+    \renewcommand{\dblfloatpagefraction}{0.7}	% require fuller float pages
+
+\setlength{\parindent}{0.25in}
+\setlength{\parskip}{2.0ex}
+
+\newtheorem*{remark}{Remark}
+
+\title{Challenge of sensitivity measurement for stochastic particle method}
+\author{Seung Whan Chung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+
+We've observed so far about the challenge in sensitivity measurement of particle methods,
+in particular the deterministic chaos.
+On the other hand, particle method often utilizes stochasticity in various parts,
+such as collisions,
+and this also raises other kind of challenge in sensitivity measurement.
+Here we would like to demonstrate the challenge raised from stochasticity,
+and furthermore that this challenge essentially has the same nature as that from deterministic chaos.
+This implies that our idea of continuum adjoint, if it works any how, then it will also resolve the issue of stochasticity simultaneously.
+\subsection*{Governing equation}
+Following equation describes a simplest stochastic model for collision dynamics,
+where particles' energy distribution is $\{E_j\}_{j=1}^N$:
+\begin{equation}
+\begin{split}
+f(E_j) &=
+\begin{dcases}
+1\qquad&: \xi_j < P(E_j)\\
+0\qquad&: \xi_j \ge P(E_j)\\
+\end{dcases}\\
+P(E_j) &= A\sin\left( \pi E_j \right)
+\label{e1}
+\end{split}
+\end{equation}
+where $\{\xi_j\}$ follows the uniform random distribution $U[0,1]$,
+and $P(E_j)$ is the probability that a particle of energy $E_j$ would experience the collision.
+For a system of particles whose energies are $\{E_j\}_{j=1}^{N}$,
+the number of collisions occurred is,
+\begin{equation*}
+N_c = \sum_{j=1}^{N} f(E_j)
+\end{equation*}
+
+\subsection*{Sensitivity and adjoint equation}
+It is quite elusive to derive the adjoint for the equation (\ref{e1}) at the first glance,
+but this is possible when (\ref{e1}) is re-expressed in terms of a heaviside step function,
+\begin{equation*}
+f(E_j) = H\left[ P(E_j) - \xi_j \right]
+\end{equation*}
+and define a constraint functional $\cH$ with adjoint probability variable $P^{\dagger}$,
+\begin{equation*}
+\cH[E_j,A] = \sum_{j=1}^N P_j^{\dagger}\left[ P_j - A\sin\left( \pi E_j \right) \right] = 0
+\end{equation*}
+Setting the QoI $\cJ=N_c$, we're interested in the sensitivity to the parameter $A$
+\begin{equation*}
+\Dpartial{\cJ}{A} = \Dpartial{}{A}\sum_{j=1}^{N} f(E_j) = \sum_{j=1}^N \Dpartial{P_j}{A}\Dpartial{}{P}H\left[ P(E_j) - \xi_j \right]
+\end{equation*}
+With a traditional sense of differentiation, the derivative of the step function $H(x)$ is 0 everywhere but $x=0$.
+The derivative of $H(x)$ at $x=0$ can be further defined on the space of distributions \cite{DIST2013}, using delta function:
+\begin{equation*}
+\Dnorm{H}{x} = \delta(x)
+\end{equation*}
+Then the sensitivity is,
+\begin{equation}
+\begin{split}
+\Dpartial{\cJ}{A} &= \sum_{j=1}^N \Dpartial{P_j}{A}\delta\left[ P(E_j) - \xi_j \right]\\
+&= \sum_{j=1}^N \sin\left( \pi E_j \right)\cdot\delta\left[ P(E_j) - \xi_j \right]
+\label{e2}
+\end{split}
+\end{equation}
+Basically here we don't necessarily need the adjoint formulation to compute sensitivity,
+since the probability and collision dynamics is quite simple.
+However we formulate the adjoint operation here to illustrate that the adjoint formulation is possible for such discontinuous operation.
+The sensitivity of the constraint functional $\cH$ is,
+\begin{equation*}
+\Dpartial{\cH}{A} = \sum_{j=1}^N P_j^{\dagger}\left[ \Dpartial{P_j}{A} - \sin\left( \pi E_j \right) \right] = 0
+\end{equation*}
+and the dual problem is,
+\begin{equation*}
+\begin{split}
+\Dpartial{\cJ}{A} &= \Dpartial{\cJ}{A} + \Dpartial{\cH}{A}\\
+&= \sum_{j=1}^N \Dpartial{P_j}{A}\delta\left[ P(E_j) - \xi_j \right] + \sum_{j=1}^N P_j^{\dagger}\left[ \Dpartial{P_j}{A} - \sin\left( \pi E_j \right) \right]\\
+&= \sum_{j=1}^N \Dpartial{P_j}{A}\left\{ P_j^{\dagger} + \delta\left[ P(E_j) - \xi_j \right] \right\} - \sum_{j=1}^N P_j^{\dagger}\sin\left( \pi E_j \right)
+\end{split}
+\end{equation*}
+Therefore the sensitivity can be expressed in terms of the adjoint variables,
+with the adjoint equation:
+\begin{equation}
+\begin{split}
+P_j^{\dagger} &= - \delta\left[ P(E_j) - \xi_j \right]\\
+\Dpartial{\cJ}{A} &= - \sum_{j=1}^N P_j^{\dagger}\sin\left( \pi E_j \right)
+\label{e3}
+\end{split}
+\end{equation}
+which is equivalent to (\ref{e2}).
+
+\subsection*{The challenge}
+Even though it is possible to compute sensitivity (even with adjoint) in the mathematical sense,
+in practice the sensitivity we measure through this has no realistic meaning.
+This is mainly due to the delta function coming from stochastic operation.
+In practical simulation the delta function would barely return a non-zero value,
+the value computed from (\ref{e2}) or (\ref{e3}) is basically always zero.
+This matter cannot be resolved by simply fixing the random seed (making $\xi_j$ constant).\\
+Meanwhile, when we compare this analytic sensitivity with finite-difference approximation of the sensitivity,
+we can be enlightened regarding how particle system approximates the observables.
+To demonstrate this, we implemented a numerical experiment:
+\begin{itemize}
+\item Energy distribution: uniform distribution of $N=10^4$ particles
+\begin{equation*}
+\begin{split}
+E_j &\sim U[0,1]\qquad\qquad j=1,\cdots,N(=10^4)\\
+A &= 0.1
+\end{split}
+\end{equation*}
+\includegraphics[width=0.5\textwidth]{figure/energy}
+\includegraphics[width=0.5\textwidth]{figure/Ec}\\
+Red line on the right figure indicates the expectation of collision numbers.
+\item Expectation from continuous distribution\\
+To examine the result of particle method,
+we compute the analytical value of observable and its sensitivity in terms of a continuous distribution.
+When the energy distribution is uniform,
+\begin{equation}
+\begin{split}
+\rho(E) &= 1\qquad\qquad E\in[0,1]\\
+N_c &= N\int_0^1 \rho(E)P(E) dE\\
+&= \frac{2}{\pi}NA
+\label{e4}
+\end{split}
+\end{equation}
+where its sensitivity to $A$ is clearly shown.
+\item Comparison with finite-difference approximation\\
+When we compute the error of finite-difference approximation,
+its dependency looks quite different from the expected truncation error (left side in Figure \ref{f1}).\\
+\begin{figure}[h]
+\includegraphics[width=0.5\textwidth]{figure/error}
+\includegraphics[width=0.5\textwidth]{figure/J}
+\caption{The constant gap between $N_c$ and $E[N_c]$ in the right figure
+is because the random seed is kept constant.}
+\label{f1}
+\end{figure}
+There are two points of observation for the left side in Figure \ref{f1}.
+\begin{itemize}
+\item For large $\Delta A$, we can see $\mathcal{O}(\Delta A^{-1})$ behavior like a round-off error.
+However, this is clearly coming from other kind of constant value,
+since round-off error is never dominant in this large-$\Delta A$ scale.
+\item For $\Delta A$ smaller than $10^{-4}$,
+the error is precisely equal to zero.
+Some may argue that $\Delta A$ is so small that $A=A+\Delta A$ in computer programs, thus making no actual change.
+However, such small scale can be observed only when $\Delta A < 10^{-15}$ or so.
+Hence this indicates that the actual sensitivity is precisely equal to zero.
+\end{itemize}
+From the expectation using continuous distribution (\ref{e4}),
+we know explicitly that the sensitivity of $N_c$ to $A$ is non-zero.
+However, the analytically derived sensitivity, which is equal to zero, 
+is consistent with finite-difference approximation in small scale of $\Delta A$.
+The reason for this is quite simple:
+stochastic particle methods approximates observables in a discontinuous, quantized way.\\
+Its discontinuous approximation is clearly shown in Figure \ref{f1} (right side).
+The sensitivity is equal to zero until $\Delta A$ become large enough to include a discontinuous change in observable.
+Once $\Delta A$ is larger than such value, we have a constant difference leading to $\mathcal{O}(\Delta A^{-1})$ behavior.
+In this sense the sensitivity (\ref{e2}) and (\ref{e3}) are well-computed and consistent with observations,
+although its value is not consistent with a realistic sensitivity.
+\end{itemize}
+
+\subsection*{Behavior of noise in observables --- together with deterministic particle method}
+We've already seen from (\ref{e4}) that a continuous distribution can predict the realistic sensitivity.
+When using the continuous energy distribution, the observable keeps continuous and differentiable,
+as shown as $E[N_c]$ in Figure \ref{f1}.
+As we use stochastic particle method, the observable is approximated with a discontinuous function:
+the real sensitivity can be estimated only above a certain scale.
+In smaller scale, we happen to measure even the sensitivity of the noise, which is discontinuous.\\
+On the other hand, we've also observed from PIC result that the deterministic particle method
+also have noise, which is continuous but non-differentiable in this case.\\
+\includegraphics[width=0.4\textwidth]{figure/discrete_exact}
+\includegraphics[width=0.5\textwidth]{figure/TSfluctuation}\\
+\begin{tabularx}{\textwidth}{|X|X|X|X|}
+\hline
+Observables & continuum mechanics (grid-based method) & stochastic particle dynamics & deterministic particle dynamics \\
+\hline
+Continuity & O & X & O \\
+\hline
+Differentiability & O & X & X \\
+\hline
+\end{tabularx}
+
+Although the noise can be continuous or not depending on whether the particle method is stochastic or deterministic,
+its implication in practice is the same:
+it approximates the observables with non-differentiable noises,
+so the sensitivity has realistic values only beyond a certain scale.
+This is not favorable for a traditional sense of sensitivity measurement or adjoint-based method,
+since they measure the sensitivity in a strict limit:
+\begin{equation}
+\Dpartial{\cJ}{A} = \lim_{h\to0} \frac{\cJ(A+h) - \cJ(A)}{h}
+\label{e5}
+\end{equation}
+For continuum mechanics, or any grid-based method approximating it,
+the adjoint-based method usually works perfect.
+The physics is described by continuous mass,
+and any small volume can be split into infinitesimal elements.
+On the other hand, with particle dynamics
+the physics is described in a discontinuous, quantized, and chaotic way (whether it is deterministic or quantum).
+Such characteristics of descriptions are manifest the same in observables on the parameter space.
+While in continuum mechanics the right-hand side of (\ref{e5}) is convergent and consistent with real observations,
+in particle dynamics a meaningful value of (\ref{e5}) can be obtained only above a certain $h$.
+Not alone that choosing a proper $h$ is an open-ended question,
+it is not practical to compute a gradient in high-dimension parameter space.\\
+One advantage of the adjoint-based method in this situation is
+that the same physics can be described in different frameworks (continuum or particle),
+and adjoint equation can be formulated from either of them.
+Here we can make an analogue of the contrast between continuous adjoint and discrete adjoint:
+If we formulate the adjoint for particle dynamics,
+we would measure the sensitivity of each single particle,
+though the sensitivity of observables from them would not be of realistic values;
+If we formulate the adjoint for continuum mechanics,
+we would be able to measure a realistic sensitivity of observables,
+but there will be statistical errors of particles approximating continuum distribution.
+
+
+\printbibliography
+
+\end{document}
